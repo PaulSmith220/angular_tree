@@ -1,0 +1,29 @@
+{
+  "name": "angular_tree",
+  "version": "0.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PaulSmith220/angular_tree.git"
+  },
+  "author": "Pavel Kuznetsov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PaulSmith220/angular_tree/issues"
+  },
+  "homepage": "https://github.com/PaulSmith220/angular_tree",
+  "devDependencies": {
+    "gulp": "^3.8.1",
+    "gulp-autoprefixer": "*",
+    "gulp-connect": "*",
+    "gulp-cssmin": "*",
+    "gulp-imagemin": "*",
+    "gulp-sass": "*",
+    "gulp-sourcemaps": "*",
+    "gulp-rigger": "*",
+    "gulp-uglify": "*",
+    "gulp-watch": "*",
+    "opn": "*",
+    "rimraf": "*"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "angular_tree",
+  "version": "0.0.0",
+  "homepage": "https://github.com/PaulSmith220/angular_tree",
+  "authors": [
+    "Paul Smith <kuznetps@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angularjs": "1.*"
+  }
+}
