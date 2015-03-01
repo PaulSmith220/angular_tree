@@ -3,6 +3,9 @@
 <head lang="ru">
     <meta charset="UTF-8">
     <title>angular_tree demo page</title>
+    <script type="text/javascript" src="scripts/demoController.js"></script>
+    <script type="text/javascript" src="scripts/angular_tree.js"></script>
+    <link rel="stylesheet" src="styles/angular_tree.css"/>
 </head>
 <body>
 <section class="header">
@@ -10,9 +13,17 @@
         Angular_tree demo page
     </h2>
 </section>
-<section class="content">
-    Tree will be here
+<hr/>
+<section class="content" ng-controller="demoController">
+
+    <tree-grid tree-data    = "treeData"
+               template     = "templates/treeTemplateBase.html"
+               col-defs     = "colDefs">
+    </tree-grid>
+
 </section>
+
+<hr/>
 <section class="footer">
     <a href="http://paulsmithjs.livejournal.com">paulsmithjs.livejournal.com</a>
 </section>

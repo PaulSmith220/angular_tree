@@ -14,6 +14,7 @@
     "tests"
   ],
   "dependencies": {
-    "angularjs": "1.*"
+    "angularjs": "1.*",
+    "angular-sanitize": "*"
   }
 }

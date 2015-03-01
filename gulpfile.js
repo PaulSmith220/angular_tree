@@ -20,7 +20,8 @@ var path = {
         js: 'build/scripts/',
         css: 'build/styles/',
         img: 'build/img/',
-        fonts: 'build/fonts/'
+        fonts: 'build/fonts/',
+        templates: 'build/templates/'
     },
     // Откуда брать исходные файлы
     src: {
@@ -28,7 +29,8 @@ var path = {
         js: 'src/scripts/*.js',
         style: 'src/styles/*.scss',
         img: 'src/img/**/*.*',
-        fonts: 'src/fonts/**/*.*'
+        fonts: 'src/fonts/**/*.*',
+        templates: 'src/templates/*.html'
     },
     // Назначаем пересборку при изменении указанных файлов
     watch: {
@@ -72,6 +74,13 @@ gulp.task('html', function () {
         .pipe(connect.reload());
 });
 
+gulp.task('templates', function () {
+    gulp.src(path.src.templates)
+        .pipe(rigger())
+        .pipe(gulp.dest(path.build.templates))
+        .pipe(connect.reload());
+});
+
 gulp.task('scripts', function () {
     gulp.src(path.src.js)
         .pipe(rigger())
@@ -107,6 +116,7 @@ gulp.task('fonts', function() {
 
 gulp.task('build', [
     'html',
+    'templates',
     'scripts',
     'styles',
     'fonts',
@@ -117,6 +127,9 @@ gulp.task('build', [
 gulp.task('watch', function(){
     watch([path.watch.html], function(event, cb) {
         gulp.start('html');
+    });
+    watch([path.watch.html], function(event, cb) {
+        gulp.start('templates');
     });
     watch([path.watch.style], function(event, cb) {
         gulp.start('styles');
