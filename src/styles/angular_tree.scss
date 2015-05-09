@@ -1,0 +1,70 @@
+$borders: 1px solid black;
+$levelPadding: 10px;
+
+.wrapper {
+  display: inline-block;
+  position: relative;
+
+  .heading {
+    border-bottom: $borders;
+    border-top: $borders;
+
+    .cell {
+      display: inline-block;
+      text-align: center;
+      box-sizing: border-box;
+
+      border-right: $borders;
+      &:first-child {
+        border-left: $borders;
+      }
+
+    }
+
+  }
+  .body {
+
+    .row {
+
+
+
+      .cell {
+        min-height: 25px;
+        display: inline-block;
+        box-sizing: border-box;
+
+        border-right: $borders;
+        border-bottom: $borders;
+        &:first-child {
+          border-left: $borders;
+        }
+      }
+    }
+
+    @for $i from 1 through 20 {
+      .req.level-#{$i} .cell:first-child {
+        padding-left: $i * $levelPadding;
+      }
+    }
+
+
+  }
+  .collapse {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: darkblue;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    line-height: 20px;
+    cursor: pointer;
+    float: left;
+    margin-right: 5px;
+
+    &.no-children {
+      background: transparent;
+      cursor: default;
+    }
+  }
+}
