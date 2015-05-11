@@ -1,0 +1,29 @@
+<div class="cell"
+     ng-repeat="col in colDefs track by $index"
+     style="width:{{col.width}}px;">
+
+    <div ng-if="$index==0"
+         class="collapse"
+         ng-class="{'no-children': !(row.children && row.children.length > 0) }"
+         ng-click="row.collapsed = !row.collapsed"
+            >
+    <span ng-if="row.children && row.children.length > 0">
+          {{row.collapsed? '+' : '-'}}
+    </span>
+    </div>
+
+
+    <span class="content">
+        {{row[col.name] || '&nbsp;'}}
+    </span>
+</div>
+
+
+<div class="row req level-{{row.lvl}}"
+     title="{{row.name}}"
+     ng-init="row.lvl = parent.lvl + 1"
+     ng-repeat="row in (parent = row).children"
+     ng-if="!parent.collapsed"
+     ng-include src="'templates/rowTemplate.html'">
+
+</div>

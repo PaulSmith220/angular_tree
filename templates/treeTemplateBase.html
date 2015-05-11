@@ -1,0 +1,16 @@
+<div class="wrapper">
+    <div class="heading">
+
+        <div ng-repeat="col in colDefs" class="cell" style="width:{{col.width}}px;">
+            {{col.name}}
+        </div>
+    </div>
+    <div class="body" ng-init="currentLevel = 0">
+        <div class="row req level-{{row.lvl}}"
+             ng-init="row.lvl = currentLevel;"
+             ng-repeat="row in treeData track by $index"
+             ng-include src="'templates/rowTemplate.html'">
+
+        </div>
+    </div>
+</div>
