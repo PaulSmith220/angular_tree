@@ -49,3 +49,7 @@
 .main-content {
   text-align: center;
 }
+
+.main-content .wrapper .body .row .cell {
+	text-align: left;
+}
