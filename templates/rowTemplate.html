@@ -3,6 +3,7 @@
      ng-if="row.visible"
      ng-repeat="col in colDefs track by $index"
      ng-class="{'last': $index == colDefs.length-1}"
+
      style="width:{{col.width}}px;">
 
     <div ng-if="$index==0"
@@ -12,7 +13,7 @@
          ng-click="row.collapsed = !row.collapsed"
             >
     <span ng-if="row.children && row.children.length > 0" ng-class="{'collapsed': row.collapsed}">
-          ▶
+
     </span>
     </div>
 
