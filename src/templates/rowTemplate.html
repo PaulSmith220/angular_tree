@@ -1,15 +1,18 @@
 
-<div class="cell"
+<div class="cell {{ col.type }}"
+     ng-if="row.visible"
      ng-repeat="col in colDefs track by $index"
+     ng-class="{'last': $index == colDefs.length-1}"
      style="width:{{col.width}}px;">
 
     <div ng-if="$index==0"
          class="collapse"
+         ng-hide="!(row.children && row.children.length > 0)"
          ng-class="{'no-children': !(row.children && row.children.length > 0) }"
          ng-click="row.collapsed = !row.collapsed"
             >
-    <span ng-if="row.children && row.children.length > 0">
-          {{row.collapsed? '+' : '-'}}
+    <span ng-if="row.children && row.children.length > 0" ng-class="{'collapsed': row.collapsed}">
+          ▶
     </span>
     </div>
 
@@ -24,7 +27,7 @@
      title="{{row.name}}"
      ng-init="row.lvl = parent.lvl + 1"
      ng-repeat="row in (parent = row).children"
-     ng-if="!parent.collapsed"
+     ng-if="!parent.collapsed && row.visible"
      ng-include src="'templates/rowTemplate.html'">
 
 </div>

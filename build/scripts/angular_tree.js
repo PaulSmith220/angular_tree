@@ -1,2 +1,96 @@
-!function(){angular.module("treeGrid",["ngSanitize"]).directive("treeGrid",["$timeout","$rootScope",function(){return{restrict:"E",template:'<div ng-include="getTemplate()"></div>',replace:!0,scope:{treeData:"=",colDefs:"=",template:"@"},link:function(e){e.testData="Дерево данных",e.getTemplate=function(){return e.template||"templates/treeTemplateBase.html"}}}}])}();
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFuZ3VsYXJfdHJlZS5qcyJdLCJuYW1lcyI6WyJhbmd1bGFyIiwibW9kdWxlIiwiZGlyZWN0aXZlIiwicmVzdHJpY3QiLCJ0ZW1wbGF0ZSIsInJlcGxhY2UiLCJzY29wZSIsInRyZWVEYXRhIiwiY29sRGVmcyIsImxpbmsiLCJ0ZXN0RGF0YSIsImdldFRlbXBsYXRlIl0sIm1hcHBpbmdzIjoiQ0FBQSxXQUNJQSxRQUFRQyxPQUFPLFlBQWEsZUFDM0JDLFVBQVUsWUFDUCxXQUFZLGFBQWMsV0FDdEIsT0FDSUMsU0FBVSxJQUNWQyxTQUFVLHlDQUNWQyxTQUFTLEVBQ1RDLE9BQ0lDLFNBQVUsSUFDVkMsUUFBUyxJQUNUSixTQUFVLEtBRWRLLEtBQU0sU0FBVUgsR0FDWkEsRUFBTUksU0FBVyxnQkFNakJKLEVBQU1LLFlBQWMsV0FDaEIsTUFBT0wsR0FBTUYsVUFBWSIsImZpbGUiOiJhbmd1bGFyX3RyZWUuanMiLCJzb3VyY2VzQ29udGVudCI6WyIoZnVuY3Rpb24gKCkge1xyXG4gICAgYW5ndWxhci5tb2R1bGUoJ3RyZWVHcmlkJywgWyduZ1Nhbml0aXplJ10pXHJcbiAgICAuZGlyZWN0aXZlKCd0cmVlR3JpZCcsIFtcclxuICAgICAgICAnJHRpbWVvdXQnLCAnJHJvb3RTY29wZScsIGZ1bmN0aW9uICgkdGltZW91dCwgJHJvb3RTY29wZSkge1xyXG4gICAgICAgICAgICByZXR1cm4ge1xyXG4gICAgICAgICAgICAgICAgcmVzdHJpY3Q6ICdFJyxcclxuICAgICAgICAgICAgICAgIHRlbXBsYXRlOiAnPGRpdiBuZy1pbmNsdWRlPVwiZ2V0VGVtcGxhdGUoKVwiPjwvZGl2PicsXHJcbiAgICAgICAgICAgICAgICByZXBsYWNlOiB0cnVlLFxyXG4gICAgICAgICAgICAgICAgc2NvcGU6IHtcclxuICAgICAgICAgICAgICAgICAgICB0cmVlRGF0YTogJz0nLFxyXG4gICAgICAgICAgICAgICAgICAgIGNvbERlZnM6ICc9JyxcclxuICAgICAgICAgICAgICAgICAgICB0ZW1wbGF0ZTogJ0AnXHJcbiAgICAgICAgICAgICAgICB9LFxyXG4gICAgICAgICAgICAgICAgbGluazogZnVuY3Rpb24gKHNjb3BlLCBlbGVtZW50LCBhdHRycykge1xyXG4gICAgICAgICAgICAgICAgICAgIHNjb3BlLnRlc3REYXRhID0gXCLQlNC10YDQtdCy0L4g0LTQsNC90L3Ri9GFXCI7XHJcblxyXG4gICAgICAgICAgICAgICAgICAgIC8qKlxyXG4gICAgICAgICAgICAgICAgICAgICAqINCg0LDRgdGI0LjRgNC10L3QuNC1INC00LvRjyDQtNC40L3QsNC80LjRh9C10YHQutC+0Lkg0L/QvtC00LPRgNGD0LfQutC4INGI0LDQsdC70L7QvdCwXHJcbiAgICAgICAgICAgICAgICAgICAgICogQHJldHVybnMgeyp8c3RyaW5nfSDQqNCw0LHQu9C+0L1cclxuICAgICAgICAgICAgICAgICAgICAgKi9cclxuICAgICAgICAgICAgICAgICAgICBzY29wZS5nZXRUZW1wbGF0ZSA9IGZ1bmN0aW9uICgpIHtcclxuICAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIHNjb3BlLnRlbXBsYXRlIHx8IFwidGVtcGxhdGVzL3RyZWVUZW1wbGF0ZUJhc2UuaHRtbFwiO1xyXG4gICAgICAgICAgICAgICAgICAgIH07XHJcbiAgICAgICAgICAgICAgICB9XHJcbiAgICAgICAgICAgIH1cclxuICAgICAgICB9XSk7XHJcblxyXG59KSgpOyJdLCJzb3VyY2VSb290IjoiL3NvdXJjZS8ifQ==
+(function () {
+    angular.module('treeGrid', ['ngSanitize'])
+        .directive('treeGrid', [
+            '$timeout', '$rootScope', function ($timeout, $rootScope) {
+                return {
+                    restrict: 'E',
+                    template: '<div ng-include="getTemplate()"></div>',
+                    replace: true,
+                    scope: {
+                        treeData: '=',
+                        colDefs: '=',
+                        template: '@'
+                    },
+                    link: function (scope, element, attrs) {
+                        scope.testData = "Дерево данных";
+
+                        /**
+                         * Расширение для динамической подгрузки шаблона
+                         * @returns {*|string} Шаблон
+                         */
+                        scope.getTemplate = function () {
+                            return scope.template || "templates/treeTemplateBase.html";
+                        };
+
+                        /**
+                         * Фильтр по полям
+                         * @type {{}}
+                         */
+                        scope.filter = {};
+
+                    }
+                }
+            }])
+        .filter('treeGridFilter', function() {
+            return function(input, filter)  {
+                var plainData = [];
+
+                /**
+                 * Рекурсивная функция, выполняющая развертку дерева в плоский массив
+                 * @param children
+                 * @param parent
+                 */
+                function toPlain(children, parent) {
+                    children.forEach(function(child) {
+                        child.parent = parent;
+                        plainData.push(child);
+                        if (child.children && child.children.length > 0) {
+                            toPlain(child.children, child);
+                        }
+                    });
+
+                };
+
+                // Т.к. корневые элементы не имеют предка, для удобства дальнейшего сворачивания, ставим его значение в false
+                toPlain(input, false);
+
+                var filtered = [];
+
+                /**
+                 * Проверяет вхождение значений фильтров в соответствующие поля элемента
+                 * @param item
+                 * @returns {boolean}
+                 */
+                function filterItem(item) {
+                    var valid = true;
+                    Object.keys(filter).forEach(function(key) {
+                        if (item[key].toString().indexOf(filter[key]) == -1) {
+                            valid = false;
+                        }
+                    });
+                    return valid;
+                }
+
+                plainData
+                    .filter(function(item) { // Выбираем только конечные элементы
+                        item.visible = false;
+                        return !item.children || item.children.length == 0;
+                    })
+                    .forEach(function(item) {
+                        if (filterItem(item)) { // Если элемент проходит фильтр, добавляем его и рекурсивно его предков в список отфильтрованного
+                            var i = item,
+                                hasParent = true;
+                            while(hasParent) {
+                                    i.visible = true;
+                                    hasParent = i = i.parent;
+                                }
+                            }
+                    });
+
+
+
+                return input;
+            }
+        });
+
+})();

@@ -84,9 +84,9 @@ gulp.task('templates', function () {
 gulp.task('scripts', function () {
     gulp.src(path.src.js)
         .pipe(rigger())
-        .pipe(sourcemaps.init())
-        .pipe(uglify())
-        .pipe(sourcemaps.write())
+       // .pipe(sourcemaps.init())
+      //  .pipe(uglify())
+       // .pipe(sourcemaps.write())
         .pipe(gulp.dest(path.build.js))
         .pipe(connect.reload());
 });

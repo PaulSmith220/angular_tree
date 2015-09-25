@@ -45,11 +45,15 @@ angular.module("demoApp", ["treeGrid"])
             $scope.colDefs = [
                 {
                     name: "name",
-                    width: 200
+                    displayName: "Город",
+                    width: 200,
+                    filterable: true
                 },
                 {
                     name: "amount",
-                    width: 200
+                    displayName: "Население на 2014г.",
+                    width: 200,
+                    type: "number"
                 }
             ];
         }

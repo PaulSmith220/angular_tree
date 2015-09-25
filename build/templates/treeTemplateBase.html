@@ -1,14 +1,18 @@
 <div class="wrapper">
     <div class="heading">
-
         <div ng-repeat="col in colDefs" class="cell" style="width:{{col.width}}px;">
-            {{col.name}}
+            <div class="data">
+                {{::col.displayName }}
+            </div>
+            <div class="filter" ng-if="col.filterable">
+                <input class="text-filter" type="text" ng-model="filter[col.name]" placeholder="No filter"/>
+            </div>
         </div>
     </div>
     <div class="body" ng-init="currentLevel = 0">
         <div class="row req level-{{row.lvl}}"
              ng-init="row.lvl = currentLevel;"
-             ng-repeat="row in treeData track by $index"
+             ng-repeat="row in (treeData | treeGridFilter:filter) track by $index"
              ng-include src="'templates/rowTemplate.html'">
 
         </div>
